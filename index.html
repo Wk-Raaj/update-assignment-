@@ -1,78 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cover Page Generator</title>
-<style>
-body{margin:0;font-family:Arial;background:#f4f6fb}
-.container{display:flex;gap:20px;padding:20px}
-.panel{width:320px;background:#fff;border-radius:10px;padding:15px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
-.panel h2{margin:0 0 10px}
-.panel input{width:100%;padding:8px;margin:5px 0;border:1px solid #ccc;border-radius:6px}
-button{width:100%;padding:10px;border:0;border-radius:8px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
-.preview{flex:1;background:#fff;padding:20px;border-radius:10px}
-.page{max-width:700px;margin:auto;border:1px solid #999;padding:25px}
-.center{text-align:center}
-.boxrow{display:flex;gap:20px;margin-top:20px}
-.box{flex:1;border:1px solid #444;padding:10px;height:130px;font-size:12px}
-.remarks{border:1px solid #444;height:60px;margin-top:15px}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="container">
 
-<div class="panel">
-<h2>Cover Page Generator</h2>
-<input id="report" placeholder="Project Report No" value="01">
-<input id="topic" placeholder="Topic">
-<input id="ctitle" placeholder="Course Title">
-<input id="ccode" placeholder="Course Code">
-<input id="date" type="date">
-<h4>SUBMITTED BY</h4>
-<input id="sname" placeholder="Name">
-<input id="sid" placeholder="ID">
-<input id="ssec" placeholder="Sec">
-<input id="sprog" placeholder="Program">
-<input id="sdept" placeholder="Department">
-<h4>SUBMITTED TO</h4>
-<input id="tname" placeholder="Name">
-<input id="tdes" placeholder="Designation">
-<input id="tdept" placeholder="Department">
-<button onclick="update()">Update Preview</button>
-<button onclick="printPage()">Export PDF</button>
+  <div class="left-panel glass">
+    <h2>Cover Page Generator</h2>
+
+    <label>Report Type</label>
+    <select id="type">
+      <option>Assignment</option>
+      <option>Lab Report</option>
+      <option selected>Project Report</option>
+    </select>
+
+    <label>No.</label>
+    <input id="no">
+
+    <label>Topic</label>
+    <input id="topic">
+
+    <label>Course Title</label>
+    <input id="ctitle">
+
+    <label>Course Code</label>
+    <input id="ccode">
+
+    <label>Submission Date</label>
+    <input type="date" id="date">
+
+    <h3>Submitted By</h3>
+    <input id="sbname" placeholder="Name">
+    <input id="sbid" placeholder="ID">
+    <input id="sbsec" placeholder="Section">
+    <input id="sbprog" placeholder="Program">
+    <input id="sbdept" placeholder="Department">
+
+    <h3>Submitted To</h3>
+    <input id="stname" placeholder="Name">
+    <input id="stdes" placeholder="Designation">
+    <input id="stdept" placeholder="Department">
+
+    <button onclick="updatePreview()">Update Preview</button>
+    <button onclick="exportPDF()">Export PDF</button>
+  </div>
+
+  <div class="right-panel glass">
+    <div id="preview">
+      <h1 id="p_type">Project Report</h1>
+      <p>No: <span id="p_no"></span></p>
+      <p>Topic: <span id="p_topic"></span></p>
+      <p>Course Title: <span id="p_ctitle"></span></p>
+      <p>Course Code: <span id="p_ccode"></span></p>
+      <p>Date: <span id="p_date"></span></p>
+
+      <div class="box">
+        <h3>Submitted To</h3>
+        <p id="p_stname"></p>
+        <p id="p_stdes"></p>
+        <p id="p_stdept"></p>
+      </div>
+
+      <div class="box">
+        <h3>Submitted By</h3>
+        <p id="p_sbname"></p>
+        <p>ID: <span id="p_sbid"></span></p>
+        <p>Sec: <span id="p_sbsec"></span></p>
+        <p>Program: <span id="p_sbprog"></span></p>
+        <p id="p_sbdept"></p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="preview">
-<div class="page" id="page">
-<div class="center">
-<h3>Project Report No: <span id="p_report">01</span></h3>
-<p>Topic: <span id="p_topic"></span></p>
-<p>Course Title: <span id="p_ctitle"></span></p>
-<p>Course Code: <span id="p_ccode"></span></p>
-<p>Submission Date: <span id="p_date"></span></p>
-</div>
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-<div class="boxrow">
-<div class="box" id="toBox"><b>SUBMITTED TO</b><br></div>
-<div class="box" id="byBox"><b>SUBMITTED BY</b><br></div>
-</div>
-<div class="remarks"></div>
-</div>
-</div>
-
-</div>
-
-<script>
-function update(){
- p_report.innerText=report.value;
- p_topic.innerText=topic.value;
- p_ctitle.innerText=ctitle.value;
- p_ccode.innerText=ccode.value;
- p_date.innerText=date.value;
- toBox.innerHTML='<b>SUBMITTED TO</b><br>Name: '+tname.value+'<br>'+tdes.value+'<br>'+tdept.value;
- byBox.innerHTML='<b>SUBMITTED BY</b><br>Name: '+sname.value+'<br>ID: '+sid.value+'<br>Sec: '+ssec.value+'<br>Program: '+sprog.value+'<br>'+sdept.value;
-}
-function printPage(){window.print();}
-</script>
 </body>
 </html>
